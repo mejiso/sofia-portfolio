@@ -27,13 +27,8 @@ class _AutoPlayVideoState extends State<AutoPlayVideo> {
     _controller = VideoPlayerController.asset(
       ('assets/nodal.mp4'),
     )
-<<<<<<< HEAD
-      ..setVolume(0)
-      ..setLooping(true)
-=======
       ..setVolume(0) 
       ..setLooping(true) // loops
->>>>>>> 1f19b6b (commented code)
       ..initialize().then((_) {
         _controller.play(); // autoplay the video
         setState(() {});
@@ -64,47 +59,51 @@ class _AutoPlayVideoState extends State<AutoPlayVideo> {
   }
 }
 
+// stateless widget: image is not altered, no animation, etc
+// widget for nodal
 class LocalImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
+    return Image.asset( // custom image from assets folder
       'assets/nodal.png',
       width: 280, 
       height: 280,
-<<<<<<< HEAD
-      fit: BoxFit.cover, 
-=======
-      fit: BoxFit.cover,
->>>>>>> 1f19b6b (commented code)
+      fit: BoxFit.cover, // fit into 280x280 box and preserve aspect ratio
     );
   }
 }
 
+// app entry point
 void main() => runApp(const PortfolioApp());
 
+// root application widget,configures global theme and settings
 class PortfolioApp extends StatelessWidget {
   const PortfolioApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // to remove debug banner
       debugShowCheckedModeBanner: false,
-      title: 'Portfolio',
-      theme: ThemeData(
+      title: 'Portfolio', // set title
+      theme: ThemeData( // set theme
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
-        fontFamily: GoogleFonts.inter().fontFamily,
+        fontFamily: GoogleFonts.inter().fontFamily, // set custom font from GoogleFonts
       ),
+      // init screen of app
       home: const HomePage(),
     );
   }
 }
 
+// main portfolio theme, stateless because UI is static
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // use static list to easily edit widgets (add on or delete)
     const languages = ['Python', 'C', 'Java', 'Flutter', 'HTML/CSS'];
     const skills = [
       'Data Analysis',
@@ -117,43 +116,52 @@ class HomePage extends StatelessWidget {
     ];
 
     return Scaffold(
+      // set bg color for entire screen
       backgroundColor: Colors.white,
+      // top bar title
       appBar: AppBar(
         title: const Text('Sofia Erykah Mejia Portfolio'),
       ),
       body: ListView(
+        // sets universal padding around all content
         padding: const EdgeInsets.all(24),
         children: [
+          // custom typewriter animation for intro header
           AnimatedTextKit(
-            isRepeatingAnimation: false,
+            isRepeatingAnimation: false, // does not repeat
             animatedTexts: [
+              // animated text
               TypewriterAnimatedText(
                 'hi, i am sofia',
-                speed: const Duration(milliseconds: 80),
-                textStyle: const TextStyle(
+                speed: const Duration(milliseconds: 80), // speed
+                textStyle: const TextStyle( // text style, font size and bold
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ],
           ),
+          // another text for email
           const SizedBox(height: 6),
           const Text('mejiso.dev@gmail.com',
               style: TextStyle(fontStyle: FontStyle.italic)),
           const SizedBox(height: 12),
+          // description
           Text(
             'CS Major @ UCF | Data Analyst & Researcher @ Limbitless Solutions | Undergraduate Research Assistant @ UCF College of Engineering + Computer Science',
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 24),
+          // languages header
           Text(
             'languages:',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
           ),
+          // .map to turn const languages list into widgets
           const SizedBox(height: 12),
-          Wrap(
+          Wrap( // wrap automatically wraps to next line
             spacing: 12,
             runSpacing: 12,
             children: languages
@@ -167,6 +175,7 @@ class HomePage extends StatelessWidget {
                 )
                 .toList(),
           ),
+          // skills header
           const SizedBox(height: 24),
           Text(
             'skills:',
@@ -174,8 +183,9 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
           ),
+          // .map for skills
           const SizedBox(height: 12),
-          Wrap(
+          Wrap( // wrap for auto wrapping to next line
             spacing: 12,
             runSpacing: 12,
             children: skills
@@ -189,10 +199,13 @@ class HomePage extends StatelessWidget {
                 )
                 .toList(),
           ),
+          // projects header
           const SizedBox(height: 32),
           const TypingSectionHeader(text: 'my projects...'),
           const SizedBox(height: 12),
 
+          // hovercard stateful widget class for mouse hover animation
+          // NODAL project #1
           HoverCard(
             child: _ProjectCard(
               title: 'Nodal: MIDI Controller & Audio Visualizer',
@@ -203,17 +216,18 @@ class HomePage extends StatelessWidget {
                   '》Rendered 15+ dynamic \'nodes\' at 60 FPS with optimized Canvas pipelines to record 100+ MIDI input per/sec and seamless DAW integration (Ableton Live, Logic, GarageBand).',
             ),
           ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 50), // to add spacing between sections
+          // box for video
           Center(
             child: SizedBox(
-              width: 700,
+              width: 700, // control size here
               child: AutoPlayVideo(
                 videoUrl: 'https://www.youtube.com/watch?v=ZJSIYxBx7A8',
               ),
             ),
           ),
 
-
+          // Univesal Stats Project #2
           const SizedBox(height: 50),
           HoverCard(
             child: _ProjectCard(
@@ -225,11 +239,13 @@ class HomePage extends StatelessWidget {
             ),
           ),
 
+          // experience header
           const SizedBox(height: 32),
           const TypingSectionHeader(text: 'my experience...'),
           const SizedBox(height: 12),
 
-  
+          //reuse project card for experience titles
+          // Limbitless
           HoverCard(
             child: _ProjectCard(
               title: 'Research & Data Analysis Intern',
@@ -240,6 +256,7 @@ class HomePage extends StatelessWidget {
                   '》Wrote 50+ research articles and led music production for serious games.',
             ),
           ),
+          // KRSP research
           HoverCard(
             child: _ProjectCard(
               title: 'Undergraduate Researcher - Vision Language Models',
@@ -250,6 +267,7 @@ class HomePage extends StatelessWidget {
                   '》Used VQA pipelines to improve behavioral interpretation accuracy by 30%.',
             ),
           ),
+          // KRSP research 2
           HoverCard(
             child: _ProjectCard(
               title: 'Undergraduate Researcher - Secure & Embedded LLM Systems',
@@ -265,55 +283,66 @@ class HomePage extends StatelessWidget {
   }
 }
 
+// reusable wrappter to add hover animation to any child
+//stateful because hover state changes the widget dynamically (not static)
 
 class HoverCard extends StatefulWidget {
-  final Widget child;
-  const HoverCard({super.key, required this.child});
+  final Widget child; // child widget will be wrapped
+  const HoverCard({super.key, required this.child}); // requires child wdiget
 
   @override
   State<HoverCard> createState() => _HoverCardState();
 }
 
 class _HoverCardState extends State<HoverCard> {
-  bool isHovered = false;
+  bool isHovered = false; // bool to track if mouse on widget (hovering)
 
   @override
   Widget build(BuildContext context) {
+    // switches cursor to pointer when hovering on widget to indicate its a dynamic object
     return MouseRegion(
       cursor: SystemMouseCursors.click,
+      // update hover state when mouse hovers
       onEnter: (_) => setState(() => isHovered = true),
+      // reset state when mouse exits
       onExit: (_) => setState(() => isHovered = false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeOut,
+        // moves the widget slightly upward when mouse hoves
         transform: isHovered
             ? Matrix4.translationValues(0, -6, 0) 
             : Matrix4.identity(),
+        // adds shadow to box when hovered with decoration
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.deepPurple.withOpacity(isHovered ? 0.18 : 0.08),
-              blurRadius: isHovered ? 22 : 10,
+              color: Colors.deepPurple.withOpacity(isHovered ? 0.18 : 0.08), // shadow color
+              blurRadius: isHovered ? 22 : 10, // radius of shadow
               offset: const Offset(0, 8),
             ),
           ],
         ),
+        // render
         child: widget.child,
       ),
     );
   }
 }
 
+// reusable animated typing class for typewriter effect
+// this is used on subheaders/headers
 class TypingSectionHeader extends StatelessWidget {
-  final String text;
+  final String text; // header text is being animated
 
-  const TypingSectionHeader({super.key, required this.text});
+  const TypingSectionHeader({super.key, required this.text}); // requires text string
 
   @override
   Widget build(BuildContext context) {
     return AnimatedTextKit(
-      isRepeatingAnimation: false,
+      isRepeatingAnimation: false, // does not loop, runs once
       animatedTexts: [
+        // text style
         TypewriterAnimatedText(
           text,
           speed: const Duration(milliseconds: 60),
@@ -327,17 +356,18 @@ class TypingSectionHeader extends StatelessWidget {
   }
 }
 
+// project card class, used multiple times for projects and experiences, reusable
 class _ProjectCard extends StatelessWidget {
-  final String title;
-  final String tools;
-  final String desc;
-
+  final String title; // main heading
+  final String tools; // subtitle
+  final String desc; // description
+  // requirements
   const _ProjectCard({
     required this.title,
     required this.tools,
     required this.desc,
   });
-
+  // card layout
   @override
   Widget build(BuildContext context) {
     return Card(
