@@ -16,6 +16,7 @@ class AutoPlayVideo extends StatefulWidget {
   State<AutoPlayVideo> createState() => _AutoPlayVideoState();
 }
 
+// portfolio nodal player
 class _AutoPlayVideoState extends State<AutoPlayVideo> {
   late VideoPlayerController _controller;
 
@@ -26,14 +27,20 @@ class _AutoPlayVideoState extends State<AutoPlayVideo> {
     _controller = VideoPlayerController.asset(
       ('assets/nodal.mp4'),
     )
+<<<<<<< HEAD
       ..setVolume(0)
       ..setLooping(true)
+=======
+      ..setVolume(0) 
+      ..setLooping(true) // loops
+>>>>>>> 1f19b6b (commented code)
       ..initialize().then((_) {
-        _controller.play(); 
+        _controller.play(); // autoplay the video
         setState(() {});
       });
   }
 
+  // release video memory, prevent mem leak
   @override
   void dispose() {
     _controller.dispose();
@@ -42,13 +49,14 @@ class _AutoPlayVideoState extends State<AutoPlayVideo> {
 
   @override
   Widget build(BuildContext context) {
+    // checks if video is init, if video not init then shows loading
     if (!_controller.value.isInitialized) {
       return const SizedBox(
         height: 300,
         child: Center(child: CircularProgressIndicator()),
       );
     }
-
+    // video is init, show the video
     return AspectRatio(
       aspectRatio: _controller.value.aspectRatio,
       child: VideoPlayer(_controller),
@@ -63,7 +71,11 @@ class LocalImageWidget extends StatelessWidget {
       'assets/nodal.png',
       width: 280, 
       height: 280,
+<<<<<<< HEAD
       fit: BoxFit.cover, 
+=======
+      fit: BoxFit.cover,
+>>>>>>> 1f19b6b (commented code)
     );
   }
 }
