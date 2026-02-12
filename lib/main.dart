@@ -26,7 +26,7 @@ class _AutoPlayVideoState extends State<AutoPlayVideo> {
     _controller = VideoPlayerController.asset(
       ('assets/nodal.mp4'),
     )
-      ..setVolume(0) // 🔇 REQUIRED for autoplay
+      ..setVolume(0)
       ..setLooping(true)
       ..initialize().then((_) {
         _controller.play(); 
@@ -61,9 +61,9 @@ class LocalImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       'assets/nodal.png',
-      width: 280, // Optional: specify dimensions
+      width: 280, 
       height: 280,
-      fit: BoxFit.cover, // Optional: control how the image is resized
+      fit: BoxFit.cover, 
     );
   }
 }
@@ -194,7 +194,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(height: 50),
           Center(
             child: SizedBox(
-              width: 700, // control size here
+              width: 700,
               child: AutoPlayVideo(
                 videoUrl: 'https://www.youtube.com/watch?v=ZJSIYxBx7A8',
               ),
